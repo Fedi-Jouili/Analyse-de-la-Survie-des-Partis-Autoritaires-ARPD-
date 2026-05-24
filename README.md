@@ -78,8 +78,3 @@ Use and redistribution: please ask the authors (listed above) for permission bef
 
 ---
 
-If you want, I can:
-- add a `requirements.txt` or `environment.yml`,
-- run the notebook and save outputs, or
-- commit these files to a Git repository.
-
