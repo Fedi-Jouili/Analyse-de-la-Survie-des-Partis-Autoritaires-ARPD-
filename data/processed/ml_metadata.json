@@ -1,0 +1,61 @@
+{
+  "created": "2026-10-02",
+  "source_notebook": "notebooks/final_panel.ipynb",
+  "origin_reference": "Dictator-Created",
+  "governance_reference": "Policy-Based",
+  "static": {
+    "file": "ml_static.csv",
+    "rows": 224,
+    "spells": 224,
+    "events": 195,
+    "countries": 113,
+    "id_column": "spell_id",
+    "group_column": "Country",
+    "duration_column": "duration",
+    "event_column": "event",
+    "features": [
+      "Marxist?",
+      "Monarchy",
+      "Gov_Repressive",
+      "Gov_Clientelist",
+      "Gov_Non code",
+      "polity2_entry",
+      "conflict_entry",
+      "Origin_Communist",
+      "Origin_Elite Coalition",
+      "Origin_Independence",
+      "Origin_Merger/Split",
+      "Origin_Military",
+      "Origin_Revolution"
+    ]
+  },
+  "timevarying": {
+    "file": "ml_timevarying.csv",
+    "rows": 3655,
+    "spells": 222,
+    "events": 193,
+    "countries": 110,
+    "id_column": "row_id",
+    "spell_column": "spell_id",
+    "group_column": "Country",
+    "start_column": "start",
+    "stop_column": "stop",
+    "event_column": "event",
+    "features": [
+      "Marxist?",
+      "Monarchy",
+      "Gov_Repressive",
+      "Gov_Clientelist",
+      "Gov_Non code",
+      "log_gdppc_lag1",
+      "polity2_lag1",
+      "conflict_active_lag1",
+      "Origin_Communist",
+      "Origin_Elite Coalition",
+      "Origin_Independence",
+      "Origin_Merger/Split",
+      "Origin_Military",
+      "Origin_Revolution"
+    ]
+  }
+}
