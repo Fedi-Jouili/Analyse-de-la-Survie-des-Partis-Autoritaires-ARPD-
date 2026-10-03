@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Source data too large for GitHub (100 MB limit): download V-Dem Country-Year Core v16
+# from https://v-dem.net/data/the-v-dem-dataset/ and save it as data/raw/V-Dem-CY-Core-v16.csv
+data/raw/V-Dem-CY-Core-v16.csv
+
+# Regenerable by notebooks/03_ml_survival.ipynb (146,200 out-of-fold predictions)
+data/processed/ml_oof_taskB.csv

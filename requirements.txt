@@ -1,0 +1,32 @@
+# Python 3.14 (Windows). Install in two steps:
+#   python -m pip install -r requirements.txt
+#   python -m pip install --no-deps scikit-survival==0.27.0
+#
+# scikit-survival is installed separately, without its dependencies: it requires `ecos`,
+# which has no pre-built wheel for Python 3.14 and needs a C++ compiler to build.
+# `ecos` is only used by scikit-survival's survival SVMs, which this project does not use.
+# Its other dependencies (numexpr, osqp) are listed below. `pip check` reports ecos as missing.
+# scikit-survival 0.27.0 is the last version compatible with scikit-learn 1.8.
+
+# Data and statistics
+numpy==2.4.1
+pandas==2.3.3
+scipy==1.17.0
+statsmodels==0.14.6
+scikit-learn==1.8.0
+lifelines==0.30.3
+joblib==1.5.3
+openpyxl==3.1.5
+
+# Figures
+matplotlib==3.10.8
+seaborn==0.13.2
+
+# Notebooks
+ipython==9.9.0
+
+# Machine learning (notebooks/03_ml_survival.ipynb)
+lightgbm==4.6.0
+shap==0.51.0
+numexpr==2.14.2
+osqp==1.1.3
