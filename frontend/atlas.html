@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="atlas.pageTitle"></title>
+  <meta name="description" data-i18n-attr="content:atlas.pageDescription">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' fill='%2304060a' stroke='%23aab4c1'/%3E%3Crect x='12' y='12' width='8' height='8' fill='%23e9edf2'/%3E%3C/svg%3E">
+  <script src="assets/i18n/fr.js"></script>
+  <script src="assets/i18n/en.js"></script>
+  <script src="assets/i18n/ar.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/atlas.css">
+</head>
+<body class="page-fixed">
+  <a class="skip-link" href="#year-slider" data-i18n="common.skipToTimeline"></a>
+  <header class="command-bar">
+    <a class="brand" href="index.html" data-nav="index.html" data-i18n-attr="aria-label:nav.home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>
+        <span class="brand-title" data-i18n="brand.title"></span><br>
+        <span class="brand-sub" data-i18n="brand.sub"></span>
+      </span>
+    </a>
+    <nav class="nav" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html" data-nav="index.html"><span class="num">01</span><span class="txt" data-i18n="nav.home"></span></a>
+      <a href="atlas.html" data-nav="atlas.html" aria-current="page"><span class="num">02</span><span class="txt" data-i18n="nav.atlas"></span></a>
+      <a href="analyse.html" data-nav="analyse.html"><span class="num">03</span><span class="txt" data-i18n="nav.analyse"></span></a>
+      <a href="simulation.html" data-nav="simulation.html"><span class="num">04</span><span class="txt" data-i18n="nav.simulation"></span></a>
+      <a href="about.html" data-nav="about.html"><span class="num">05</span><span class="txt" data-i18n="nav.about"></span></a>
+    </nav>
+    <div class="status">
+      <div class="lang-switch" id="lang-switch" role="group"></div>
+      <div class="status-item"><span class="label" data-i18n="status.data"></span><span class="v" id="data-built">—</span></div>
+      <div class="status-item"><span class="label" data-i18n="status.clock"></span><span class="v" id="utc-clock">—</span></div>
+      <span class="pulse" data-i18n-attr="title:status.ok"></span>
+    </div>
+  </header>
+
+  <main class="atlas">
+    <h1 class="sr-only" data-i18n="atlas.pageTitle"></h1>
+    <div id="globe" class="globe" role="img" data-i18n-attr="aria-label:atlas.globeAria"></div>
+    <div class="globe-loading" id="globe-loading" role="status">
+      <div class="loading-box">
+        <span class="loading-ring" aria-hidden="true"></span>
+        <span class="label" data-i18n="atlas.loading"></span>
+        <span class="note" data-i18n="atlas.loadingNote"></span>
+      </div>
+    </div>
+    <div class="sr-only" id="year-live" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Situation mondiale (sur téléphone : carte repliable au-dessus de la ligne du temps) -->
+    <section class="panel bracket hud hud-left" id="world" aria-labelledby="world-title">
+      <div class="panel-head world-head">
+        <h2 class="label" id="world-title" data-i18n="atlas.world"></h2>
+        <span class="mono year-badge" id="world-year">—</span>
+        <button class="world-toggle" id="world-toggle" type="button" aria-expanded="true" aria-controls="world-body"
+                aria-labelledby="world-title world-summary"><span class="world-summary" id="world-summary"></span></button>
+      </div>
+      <div class="world-body" id="world-body">
+        <div class="panel-body">
+          <div class="headline">
+            <span class="big ticker" id="kpi-autocracies">0</span>
+            <span class="headline-txt"><span class="label" data-i18n="atlas.kpiLabel"></span><br>
+              <span class="muted" id="kpi-share">—</span></span>
+          </div>
+          <ul class="legend" id="legend" data-i18n-attr="aria-label:atlas.legendAria"></ul>
+          <p class="note" id="legend-note"></p>
+        </div>
+        <div class="panel-head sub"><h2 class="label" data-i18n="atlas.events"></h2><span class="mono dim" id="events-count"></span></div>
+        <div class="panel-body events" id="events"></div>
+        <div class="panel-head sub"><h2 class="label" data-i18n="atlas.oldest"></h2></div>
+        <div class="panel-body"><ol class="oldest" id="oldest"></ol></div>
+      </div>
+    </section>
+
+    <!-- Commandes d'affichage -->
+    <section class="panel bracket hud hud-controls" data-i18n-attr="aria-label:atlas.controlsAria">
+      <div class="panel-body controls-grid">
+        <div class="ctl-view">
+          <div class="label" data-i18n="atlas.viewLabel"></div>
+          <div class="seg" role="group" id="view-seg" data-i18n-attr="aria-label:atlas.viewLabel">
+            <button type="button" data-view="globe" aria-pressed="true" data-i18n="atlas.viewGlobe"></button>
+            <button type="button" data-view="list" aria-pressed="false" data-i18n="atlas.viewList"></button>
+          </div>
+        </div>
+        <div class="ctl-mode">
+          <div class="label" data-i18n="atlas.modeLabel"></div>
+          <div class="seg" role="group" id="mode-seg" data-i18n-attr="aria-label:atlas.modeAria">
+            <button type="button" data-mode="type" aria-pressed="true" data-i18n="atlas.modeType"></button>
+            <button type="button" data-mode="age" aria-pressed="false" data-i18n="atlas.modeAge"></button>
+            <button type="button" data-mode="vdem" aria-pressed="false" data-i18n="atlas.modeVdem"></button>
+          </div>
+        </div>
+        <label class="toggle ctl-relief" data-i18n-attr="title:atlas.reliefTitle">
+          <input type="checkbox" id="relief-toggle">
+          <span class="track" aria-hidden="true"></span>
+          <span data-i18n="atlas.relief"></span>
+        </label>
+        <label class="toggle ctl-rotate">
+          <input type="checkbox" id="rotate-toggle" checked>
+          <span class="track" aria-hidden="true"></span>
+          <span data-i18n="atlas.rotate"></span>
+        </label>
+        <div class="search">
+          <label class="label" for="search-input" data-i18n="atlas.searchLabel"></label>
+          <input id="search-input" list="country-list" autocomplete="off" data-i18n-attr="placeholder:atlas.searchPlaceholder">
+          <datalist id="country-list"></datalist>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vue en liste -->
+    <section class="panel bracket hud list-panel" id="list-panel" aria-labelledby="list-title" hidden>
+      <div class="panel-head">
+        <h2 class="label" id="list-title"></h2>
+        <span class="mono dim" id="list-count"></span>
+        <button class="btn icon ghost" id="list-close" type="button" data-i18n-attr="aria-label:atlas.list.close">✕</button>
+      </div>
+      <p class="note list-note" id="list-note" data-i18n="atlas.noWebgl" role="status" hidden></p>
+      <div class="list-scroll" id="list-body"></div>
+    </section>
+
+    <!-- Dossier pays -->
+    <aside class="panel bracket hud dossier" id="dossier" aria-labelledby="dossier-label" aria-live="polite" hidden>
+      <div class="panel-head">
+        <span class="label" id="dossier-label" data-i18n="atlas.dossier"></span>
+        <button class="btn icon ghost" id="dossier-close" type="button" data-i18n-attr="aria-label:atlas.dossierClose">✕</button>
+      </div>
+      <div class="dossier-scroll" id="dossier-body"></div>
+    </aside>
+
+    <!-- Ligne du temps : de gauche à droite dans les trois langues -->
+    <section class="panel bracket timeline" data-i18n-attr="aria-label:atlas.timelineAria">
+      <div class="year-block">
+        <span class="label" data-i18n="atlas.year"></span>
+        <span class="year-display mono" id="year-display">1975</span>
+        <div class="year-buttons" dir="ltr">
+          <button class="btn icon ghost" type="button" id="year-prev" data-i18n-attr="aria-label:atlas.prevYear">‹</button>
+          <button class="btn icon" type="button" id="play">▶</button>
+          <button class="btn icon ghost" type="button" id="year-next" data-i18n-attr="aria-label:atlas.nextYear">›</button>
+        </div>
+      </div>
+      <div class="track-block" dir="ltr">
+        <!-- Titre du graphique et bouton pour l'afficher / le masquer : le globe prend la place libérée -->
+        <div class="track-head">
+          <span class="label" data-i18n="atlas.historyTitle"></span>
+          <button class="graph-toggle" type="button" id="graph-toggle" aria-controls="history" aria-expanded="true"></button>
+        </div>
+        <svg id="history" class="history" role="img"></svg>
+        <input type="range" id="year-slider" min="1946" max="2024" step="1" value="1975" data-i18n-attr="aria-label:atlas.year">
+        <div class="ticks mono" id="ticks" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <p class="credits note" data-i18n="atlas.credits"></p>
+  </main>
+
+  <script src="vendor/globe.gl.min.js"></script>
+  <script src="data/countries.js"></script>
+  <script src="data/atlas.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/labels.js"></script>
+  <script src="assets/js/atlas.js"></script>
+</body>
+</html>

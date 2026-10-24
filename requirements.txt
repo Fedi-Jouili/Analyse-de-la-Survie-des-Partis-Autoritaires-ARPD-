@@ -17,16 +17,33 @@ scikit-learn==1.8.0
 lifelines==0.30.3
 joblib==1.5.3
 openpyxl==3.1.5
+xlrd==2.0.2           # .xls files (PRIO Battle Deaths, notebooks/05_shocks.ipynb)
+pyreadr==0.5.7        # .rda files (LEAD, src/download_party_leader_data.py)
 
 # Figures
 matplotlib==3.10.8
 seaborn==0.13.2
 
-# Notebooks
+# Notebooks (and running them with python -m nbconvert)
 ipython==9.9.0
+ipykernel==7.1.0
+nbconvert==7.17.1
 
 # Machine learning (notebooks/03_ml_survival.ipynb)
 lightgbm==4.6.0
 shap==0.51.0
 numexpr==2.14.2
 osqp==1.1.3
+
+# API (api/) and tests (tests/)
+fastapi==0.128.0
+uvicorn==0.40.0
+pydantic==2.12.5
+pytest==9.1.1
+httpx==0.28.1
+
+# Website data build (frontend/build_data.py)
+geopandas==1.1.3
+shapely==2.1.2
+pyogrio==0.12.1
+pyproj==3.7.2

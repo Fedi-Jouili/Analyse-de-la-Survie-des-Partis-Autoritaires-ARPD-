@@ -1,0 +1,48 @@
+/* Graphiques partagés par l'accueil et le tableau de bord (assets/js/charts.js).
+   Marques fines, grille et axes discrets ; le texte reste à l'encre, jamais à la couleur des données. */
+
+/* Courbes (SVG) */
+.chart { width: 100%; display: block; overflow: visible; }
+.chart text { font-family: var(--font-mono); font-size: 10.5px; fill: var(--ink-3); }
+.chart .axis line, .chart .axis path { stroke: var(--hair-strong); }
+.chart .grid line { stroke: var(--hair); }
+.chart .lbl { font-family: var(--font-ui); font-size: 11px; fill: var(--ink-2); }
+.chart .lbl.hl { fill: var(--ink-1); }
+.chart .axis-title { font-family: var(--font-ui); font-size: 11px; fill: var(--ink-3); }
+html[lang="ar"] .chart .axis-title { font-size: 12px; }
+
+/* Lignes « étiquette | tracé | valeur » */
+.cchart { display: grid; gap: 4px; min-width: 0; }
+.crows { display: grid; gap: 2px; }
+.crow {
+  display: grid; grid-template-columns: minmax(96px, 36%) minmax(0, 1fr) 64px; gap: 12px; align-items: center;
+  min-height: 28px; padding: 0 6px; margin: 0 -6px; border-radius: 2px;
+  transition: background var(--t-fast) var(--ease);
+}
+.crow[tabindex]:hover, .crow[tabindex]:focus { background: rgba(233, 237, 242, 0.05); outline: none; }
+.crow[tabindex]:focus-visible { outline: 1px solid var(--ink-1); outline-offset: 0; }
+.crow-label { font-size: 12.5px; color: var(--ink-2); line-height: 1.3; min-width: 0; }
+.crow-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 12px; color: var(--ink-1); text-align: end; white-space: nowrap; }
+.crow.muted .crow-label, .crow.muted .crow-value { color: var(--ink-4); }
+.crow.ref .crow-label { color: var(--ink-1); font-weight: 500; }
+.crow-track { min-width: 0; }
+.crow-track svg { display: block; overflow: visible; }
+.crow-axis { min-height: 18px; }
+.crows.db .crow { grid-template-columns: minmax(96px, 34%) minmax(0, 1fr) 118px; }
+.cgroup { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 8px 0 2px; }
+.cgroup:first-child { margin-top: 0; }
+html[lang="ar"] .crow-label { font-size: 13.5px; }
+html[lang="ar"] .cgroup { font-size: 12px; text-transform: none; }
+
+/* Légende : une clé de la forme de la marque à côté d'un texte à l'encre */
+.clegend { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; color: var(--ink-2); }
+.clegend li { display: inline-flex; align-items: center; gap: 8px; }
+.clegend .key { width: 14px; height: 8px; border-radius: 2px; flex: none; }
+.clegend .key.dot { width: 10px; height: 10px; border-radius: 50%; }
+html[lang="ar"] .clegend { font-size: 13px; }
+
+@media (max-width: 640px) {
+  .crow { grid-template-columns: minmax(84px, 40%) minmax(0, 1fr) 52px; gap: 8px; }
+  .crows.db .crow { grid-template-columns: minmax(84px, 34%) minmax(0, 1fr) 104px; }
+  .crow-label { font-size: 12px; }
+}

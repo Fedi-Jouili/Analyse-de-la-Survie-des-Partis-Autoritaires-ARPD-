@@ -1,0 +1,20 @@
+# Render (https://render.com) Blueprint: the website is static. Render publishes the frontend/ folder as it is; there is
+# nothing to build on Render (frontend/data/*.js is produced locally by python frontend/build_data.py and committed).
+# Each push to the main branch deploys the site again.
+services:
+  - type: web
+    name: observatoire-regimes-autoritaires
+    runtime: static
+    buildCommand: echo "Static site, nothing to build"
+    staticPublishPath: ./frontend
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN

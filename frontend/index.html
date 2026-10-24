@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="home.pageTitle"></title>
+  <meta name="description" data-i18n-attr="content:home.pageDescription">
+  <script>
+    // Anciens liens directs vers l'Atlas (index.html#pays=CUB&annee=1975, #vue=liste) : l'Atlas est maintenant atlas.html
+    (function () {
+      var h = new URLSearchParams(location.hash.slice(1));
+      if (h.has("pays") || h.has("annee") || h.has("vue")) location.replace("atlas.html" + location.search + location.hash);
+    })();
+  </script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' fill='%2304060a' stroke='%23aab4c1'/%3E%3Crect x='12' y='12' width='8' height='8' fill='%23e9edf2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="assets/i18n/fr.js"></script>
+  <script src="assets/i18n/en.js"></script>
+  <script src="assets/i18n/ar.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/charts.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body>
+  <a class="skip-link" href="#home-main" data-i18n="common.skipToContent"></a>
+  <header class="command-bar">
+    <a class="brand" href="index.html" data-nav="index.html" data-i18n-attr="aria-label:nav.home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>
+        <span class="brand-title" data-i18n="brand.title"></span><br>
+        <span class="brand-sub" data-i18n="brand.sub"></span>
+      </span>
+    </a>
+    <nav class="nav" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html" data-nav="index.html" aria-current="page"><span class="num">01</span><span class="txt" data-i18n="nav.home"></span></a>
+      <a href="atlas.html" data-nav="atlas.html"><span class="num">02</span><span class="txt" data-i18n="nav.atlas"></span></a>
+      <a href="analyse.html" data-nav="analyse.html"><span class="num">03</span><span class="txt" data-i18n="nav.analyse"></span></a>
+      <a href="simulation.html" data-nav="simulation.html"><span class="num">04</span><span class="txt" data-i18n="nav.simulation"></span></a>
+      <a href="about.html" data-nav="about.html"><span class="num">05</span><span class="txt" data-i18n="nav.about"></span></a>
+    </nav>
+    <div class="status">
+      <div class="lang-switch" id="lang-switch" role="group"></div>
+      <div class="status-item"><span class="label" data-i18n="status.data"></span><span class="v" id="data-built">—</span></div>
+      <div class="status-item"><span class="label" data-i18n="status.clock"></span><span class="v" id="utc-clock">—</span></div>
+      <span class="pulse" data-i18n-attr="title:status.ok"></span>
+    </div>
+  </header>
+
+  <main class="home" id="home-main" tabindex="-1">
+    <!-- Introduction -->
+    <section class="home-hero" aria-labelledby="home-title">
+      <span class="label" data-i18n="home.kicker"></span>
+      <h1 class="display" id="home-title" data-i18n="home.title"></h1>
+      <p class="lead" data-i18n="home.lead"></p>
+      <div class="hero-cta">
+        <a class="btn" href="atlas.html" data-nav="atlas.html" data-i18n="home.ctaAtlas"></a>
+        <a class="btn ghost" href="analyse.html" data-nav="analyse.html" data-i18n="home.ctaAnalyse"></a>
+      </div>
+      <p class="authors"><span class="label" data-i18n="about.authors"></span> <span>Fedi Jouili</span></p>
+    </section>
+
+    <!-- Chiffres clés -->
+    <section class="home-sec" aria-labelledby="kpi-title">
+      <h2 class="label" id="kpi-title" data-i18n="home.kpiTitle"></h2>
+      <div class="home-kpis" id="kpis"></div>
+    </section>
+
+    <!-- Résumé des résultats, en graphiques -->
+    <section class="home-sec" aria-labelledby="summary-title">
+      <h2 class="label" id="summary-title" data-i18n="home.summaryTitle"></h2>
+      <div class="findings" id="findings"></div>
+    </section>
+
+    <!-- Les trois outils du site -->
+    <section class="home-sec" aria-labelledby="explore-title">
+      <h2 class="label" id="explore-title" data-i18n="home.exploreTitle"></h2>
+      <div class="explore">
+        <a class="tool panel bracket" href="atlas.html" data-nav="atlas.html">
+          <span class="num mono">02</span><span class="tool-title" data-i18n="nav.atlas"></span>
+          <span class="tool-text" data-i18n="home.tools.atlas"></span>
+        </a>
+        <a class="tool panel bracket" href="analyse.html" data-nav="analyse.html">
+          <span class="num mono">03</span><span class="tool-title" data-i18n="nav.analyse"></span>
+          <span class="tool-text" data-i18n="home.tools.analyse"></span>
+        </a>
+        <a class="tool panel bracket" href="simulation.html" data-nav="simulation.html">
+          <span class="num mono">04</span><span class="tool-title" data-i18n="nav.simulation"></span>
+          <span class="tool-text" data-i18n="home.tools.simulation"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="home-sec" aria-labelledby="sources-title">
+      <h2 class="label" id="sources-title" data-i18n="home.sourcesTitle"></h2>
+      <ul class="source-grid" id="source-grid"></ul>
+      <a class="more-link" href="about.html#sources" data-nav="about.html#sources" data-i18n="home.sourcesMore"></a>
+    </section>
+
+    <p class="note built" id="built"></p>
+  </main>
+
+  <script src="data/stats.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/labels.js"></script>
+  <script src="assets/js/findings.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

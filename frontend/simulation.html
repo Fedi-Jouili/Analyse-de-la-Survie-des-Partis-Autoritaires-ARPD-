@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="sim.pageTitle"></title>
+  <meta name="description" data-i18n-attr="content:sim.pageDescription">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' fill='%2304060a' stroke='%23aab4c1'/%3E%3Crect x='12' y='12' width='8' height='8' fill='%23e9edf2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="assets/i18n/fr.js"></script>
+  <script src="assets/i18n/en.js"></script>
+  <script src="assets/i18n/ar.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/simulation.css">
+</head>
+<body>
+  <a class="skip-link" href="#params-title" data-i18n="common.skipToContent"></a>
+  <header class="command-bar">
+    <a class="brand" href="index.html" data-nav="index.html" data-i18n-attr="aria-label:nav.home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>
+        <span class="brand-title" data-i18n="brand.title"></span><br>
+        <span class="brand-sub" data-i18n="brand.sub"></span>
+      </span>
+    </a>
+    <nav class="nav" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html" data-nav="index.html"><span class="num">01</span><span class="txt" data-i18n="nav.home"></span></a>
+      <a href="atlas.html" data-nav="atlas.html"><span class="num">02</span><span class="txt" data-i18n="nav.atlas"></span></a>
+      <a href="analyse.html" data-nav="analyse.html"><span class="num">03</span><span class="txt" data-i18n="nav.analyse"></span></a>
+      <a href="simulation.html" data-nav="simulation.html" aria-current="page"><span class="num">04</span><span class="txt" data-i18n="nav.simulation"></span></a>
+      <a href="about.html" data-nav="about.html"><span class="num">05</span><span class="txt" data-i18n="nav.about"></span></a>
+    </nav>
+    <div class="status">
+      <div class="lang-switch" id="lang-switch" role="group"></div>
+      <div class="status-item"><span class="label" data-i18n="status.model"></span><span class="v" id="model-info">—</span></div>
+      <div class="status-item"><span class="label" data-i18n="status.clock"></span><span class="v" id="utc-clock">—</span></div>
+      <span class="pulse" data-i18n-attr="title:status.ok"></span>
+    </div>
+  </header>
+
+  <main class="sim">
+    <header class="sim-head">
+      <span class="label" data-i18n="sim.kicker"></span>
+      <h1 class="display" data-i18n="sim.title"></h1>
+      <p class="muted" id="sim-lead"></p>
+    </header>
+
+    <div class="sim-grid">
+      <!-- Paramètres -->
+      <section class="panel bracket params" aria-labelledby="params-title">
+        <div class="panel-head"><h2 class="label" id="params-title" data-i18n="sim.params"></h2><span class="mono dim" id="param-count"></span></div>
+        <div class="panel-body">
+          <div class="mode-row">
+            <div class="seg" role="group" id="mode-seg" data-i18n-attr="aria-label:sim.modeAria">
+              <button type="button" data-mode="free" aria-pressed="true" data-i18n="sim.modeFree"></button>
+              <button type="button" data-mode="challenge" aria-pressed="false" data-i18n="sim.modeChallenge"></button>
+            </div>
+          </div>
+          <div class="challenges" id="challenges" hidden></div>
+          <fieldset class="field">
+            <legend class="label" data-i18n="sim.field.origin"></legend>
+            <div class="tiles" id="origin-tiles" role="radiogroup" data-i18n-attr="aria-label:sim.field.origin"></div>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="label" data-i18n="sim.field.governance"></legend>
+            <div class="tiles three" id="gov-tiles" role="radiogroup" data-i18n-attr="aria-label:sim.field.governance"></div>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="label" data-i18n="sim.field.entry"></legend>
+            <div class="switches" id="switches"></div>
+          </fieldset>
+          <fieldset class="field" id="polity-field">
+            <legend class="label" data-i18n="sim.field.polity"></legend>
+            <div class="slider-row" dir="ltr">
+              <div class="slider-wrap" id="polity-wrap">
+                <span class="range-band" id="polity-band" aria-hidden="true"></span>
+                <input type="range" id="polity" min="-10" max="10" step="1" aria-describedby="polity-help" data-i18n-attr="aria-label:sim.field.polity">
+              </div>
+              <span class="slider-value mono" id="polity-value">—</span>
+            </div>
+            <div class="scale-labels" dir="ltr"><span data-i18n="sim.polityLow"></span><span>0</span><span data-i18n="sim.polityHigh"></span></div>
+            <p class="note" id="polity-help"></p>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="label" data-i18n="sim.field.horizon"></legend>
+            <div class="slider-row" dir="ltr">
+              <input type="range" id="horizon" min="10" step="1" data-i18n-attr="aria-label:sim.field.horizon">
+              <span class="slider-value mono" id="horizon-value">—</span>
+            </div>
+          </fieldset>
+          <div class="actions">
+            <button class="btn" type="button" id="run" data-i18n="sim.run"></button>
+            <button class="btn ghost" type="button" id="reset" data-i18n="sim.reset"></button>
+          </div>
+          <div class="share">
+            <button class="btn ghost share-btn" type="button" id="share" data-i18n="sim.share"></button>
+            <span class="note" id="share-status" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Résultats -->
+      <section class="results" aria-live="polite" aria-labelledby="results-title">
+        <h2 class="sr-only" id="results-title" data-i18n="sim.results"></h2>
+        <div class="panel bracket challenge-card" id="challenge-card" hidden></div>
+        <div class="panel bracket hero">
+          <div class="hero-main">
+            <span class="label" data-i18n="sim.medianLabel"></span>
+            <div class="hero-value"><span id="median-value" class="hero-num">—</span><span class="hero-unit" id="median-unit"></span></div>
+            <div class="conf-row" id="confidence"></div>
+            <p class="hero-sub" id="median-sub"></p>
+          </div>
+          <div class="hero-side">
+            <div class="probs" id="probs"></div>
+          </div>
+        </div>
+
+        <div class="panel bracket chart-panel">
+          <div class="panel-head">
+            <h3 class="label" data-i18n="sim.chartTitle"></h3>
+            <span class="legend-inline" id="chart-legend"></span>
+          </div>
+          <div class="panel-body"><div id="curve" class="curve" dir="ltr"></div></div>
+        </div>
+
+        <div class="two">
+          <div class="panel bracket">
+            <div class="panel-head"><h3 class="label" data-i18n="sim.leversTitle"></h3></div>
+            <div class="panel-body" id="levers"></div>
+          </div>
+          <div class="panel bracket">
+            <div class="panel-head"><h3 class="label" data-i18n="sim.rankTitle"></h3></div>
+            <div class="panel-body" id="rank"></div>
+          </div>
+        </div>
+
+        <div class="panel bracket" id="warnings-panel" hidden>
+          <div class="panel-head"><h3 class="label" data-i18n="sim.warningsTitle"></h3></div>
+          <div class="panel-body warnings" id="warnings"></div>
+        </div>
+
+        <div class="two">
+          <div class="panel bracket">
+            <div class="panel-head"><h3 class="label" data-i18n="sim.analogsTitle"></h3><span class="mono dim" id="analog-count"></span></div>
+            <div class="panel-body" id="analogs"></div>
+          </div>
+          <div class="panel bracket">
+            <div class="panel-head"><h3 class="label" data-i18n="sim.logTitle"></h3><button class="btn icon ghost" id="clear-log" type="button" data-i18n-attr="aria-label:sim.logClear">✕</button></div>
+            <div class="panel-body" id="log"></div>
+          </div>
+        </div>
+
+        <p class="note disclaimer" id="disclaimer"></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="data/model.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/labels.js"></script>
+  <script src="assets/js/survival.js"></script>
+  <script src="assets/js/game.js"></script>
+  <script src="assets/js/simulation.js"></script>
+</body>
+</html>
